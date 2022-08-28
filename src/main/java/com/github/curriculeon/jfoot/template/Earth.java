@@ -1,5 +1,6 @@
 package com.github.curriculeon.jfoot.template;
 
+import com.github.git_leon.RandomUtils;
 import com.github.git_leon.jfoot.system.resources.JFootImage;
 import com.github.git_leon.jfoot.world.AbstractJFootWorld;
 
@@ -18,7 +19,13 @@ public class Earth extends AbstractJFootWorld {
 
     @Override
     protected void init() {
-        addObject(new Greep(), getWidth() / 2, getHeight() / 2);
-        addObject(new Greep(), getWidth() / 2, getHeight() / 2);
+
+    }
+
+    @Override
+    public void act() {
+        if(RandomUtils.createBoolean(10)) {
+            addObject(new Animal(), RandomUtils.createInteger(0, getWidth()), RandomUtils.createInteger(0, getHeight()));
+        }
     }
 }
