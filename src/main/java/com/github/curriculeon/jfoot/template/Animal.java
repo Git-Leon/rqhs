@@ -1,7 +1,6 @@
 package com.github.curriculeon.jfoot.template;
 
 import com.github.git_leon.RandomUtils;
-import com.github.git_leon.jfoot.system.resources.JFootImage;
 import greenfoot.Actor;
 
 /**
@@ -18,10 +17,16 @@ public class Animal extends Actor {
 
     public void act() {
         move(RandomUtils.createInteger(1, 3));
-        if (RandomUtils.createBoolean(10)) {
-            turn(RandomUtils.createInteger(0, 90));
+        final boolean isAtEdge = isAtEdge();
+        final boolean shouldDieSpontaneously = RandomUtils.createBoolean(1);
+        final boolean shouldDie = isAtEdge || shouldDieSpontaneously;
+        final boolean shouldTurn = RandomUtils.createBoolean(10);
+        final int amountToTurn = RandomUtils.createInteger(0, 90);
+
+        if (shouldTurn) {
+            turn(amountToTurn);
         }
-        if (isAtEdge()) {
+        if (shouldDie) {
             getWorld().removeObject(this);
         }
     }
